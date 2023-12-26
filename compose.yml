@@ -1,0 +1,29 @@
+version: '3'
+services:
+  web:
+    image: nginx:1.25
+    ports:
+      - '127.0.0.1:8090:8010'
+    volumes:
+      - ./conf/nginx.dev.conf:/etc/nginx/conf.d/nginx.conf
+      - ./app/public:/app/public
+  php:
+    build: .
+    image: php-composer:8.3
+    volumes:
+      - ./app:/app
+    user: ${DOCKER_USER}
+    ports:
+      - '127.0.0.1:9000:9000'
+  # mysql:
+  #   image: mysql:8.2
+  #   command: --default-authentication-plugin=mysql_native_password
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=needtobechanged
+  #     - MYSQL_DATABASE=tprt
+  #     - MYSQL_USERNAME=tprt_user
+  #     - MYSQL_PASSWORD=needtobechanged
+  #   volumes:
+  #     - ./.local/mysql_data:/var/lib/mysql
+  #   ports:
+  #     - '127.0.0.1:3306:3306'

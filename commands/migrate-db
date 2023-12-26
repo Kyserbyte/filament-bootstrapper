@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+. "$BAGCLI_WORKDIR/commands/common"
+cd $LF_SRC_PATH
+
+php-composer php artisan migrate

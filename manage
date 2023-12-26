@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+set -e
+export BAGCLI_WORKDIR=$(cd $(dirname $0) && pwd)
+. "$BAGCLI_WORKDIR/commands/common"
+
+cli_help() {
+    cli_name=${0##*/}
+    echo "
+Manage the laravel/filament project
+Version: $(cat $BAGCLI_WORKDIR/VERSION)
+Usage: $cli_name [command]
+Commands:
+  build-docker-image    Build/rebuild the docker dev image
+  create-admin-user     Create a new admin user that can access the dashboard
+  migrate-db            Run the migration tasks for the DB
+  run                   Run the docker containers defined in the compose.yml file
+  generate              Generate the laravel/filament project by installing all required components (it is destructive)
+  *                     Help
+"
+    exit 1
+}
+
+case "$1" in
+create-admin-user)
+    "$BAGCLI_WORKDIR/commands/create-admin-user" "$2"
+    ;;
+build-docker-image)
+    "$BAGCLI_WORKDIR/commands/build-docker-image" "$2"
+    ;;
+migrate-db)
+    "$BAGCLI_WORKDIR/commands/migrate-db" "$2"
+    ;;
+run)
+    "$BAGCLI_WORKDIR/commands/run" "$2"
+    ;;
+generate)
+    "$BAGCLI_WORKDIR/commands/generate" "$2"
+    ;;
+*)
+    cli_help
+    ;;
+esac

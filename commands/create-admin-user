@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+. "$BAGCLI_WORKDIR/commands/common"
+cd $LF_SRC_PATH
+
+cli_log "Creating new admin user for filament panel..."
+php-composer php artisan make:filament-user

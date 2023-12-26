@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+. "$BAGCLI_WORKDIR/commands/common"
+
+set -e
+
+cli_log "Building the docker dev image ..."
+docker compose build php
+
+cli_log "Installing Laravel ..."
+php-composer composer create-project laravel/laravel $LF_INSTALL_NAME
+
+cd $LF_SRC_PATH
+cli_log "Installing Livewire ..."
+php-composer composer require livewire/livewire
+
+cli_log "Installing Filament ..."
+php-composer composer require filament/filament:"^3.1" -W
+
+php-composer php artisan filament:install --panels
+
+cli_log "Patching .env file to use SQLite ..."
+sed -i '.mysql' -E "s/(DB_.+)/# \1/" .env .env.example
+sed -i '' -E "s/# (DB_CONNECTION=)(.+)/\1sqlite/" .env .env.example
+
+echo "Installation completed! use './manage run' to run the application, this spawn the server at 'http://localhost:8090'"
+echo "The Filament panel is at 'http://localhost:8090/admin'"
+echo "Please note that by default the used db for the application is SQLite"

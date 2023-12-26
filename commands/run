@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+. "$BAGCLI_WORKDIR/commands/common"
+
+docker compose -f compose.yml down
+docker compose -f compose.yml up
+docker compose -f compose.yml down

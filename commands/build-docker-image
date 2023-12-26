@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+. "$BAGCLI_WORKDIR/commands/common"
+cli_log "Building the docker dev image..."
+docker compose build

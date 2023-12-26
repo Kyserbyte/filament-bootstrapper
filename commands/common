@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+LF_INSTALL_NAME="src"
+LF_SRC_PATH="$BAGCLI_WORKDIR/$LF_INSTALL_NAME"
+
+function php-composer() {
+    docker run --rm --interactive --tty \
+        --volume $PWD:/app \
+        --user $(id -u):$(id -g) \
+        php-composer:8.3 "$@"
+}
+
+cli_log() {
+    script_name=${0##*/}
+    timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+    echo "[$script_name] [$timestamp] $1"
+}
