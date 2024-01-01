@@ -2,6 +2,11 @@
 
 This is a tiny tool repo that provide a fast and quick way to bootstrap a Filament/Laravel project by using docker containers to set a development environment
 
+## Pre-requisites
+You need to have docker installed on your machine. Please follow this guide to install it https://docs.docker.com/get-docker/
+
+Please note that the tool is based on bash scripts so you can run it only on *nix systems (like Linux or MacOS)
+
 ## How to use it
 
 The project is provided of a simple bash cli to manage all the operations.
@@ -50,6 +55,6 @@ this command creates an admin user that can access the filament dashboard panel.
 ```bash
 $ ./manage run
 ```
-this task run the application using the docker compse command and the built images. It spawn an `nginx` server at the address `http:\\localhost:8090`.
-The Filament panel can be reached at `http:\\localhost:8090\admin`.
+this task run the application using the docker compose command and the built images. It spawn an `nginx` server at the address `http:\\localhost:8090`.
+The Filament panel can is at `http:\\localhost:8090\admin`.
 
